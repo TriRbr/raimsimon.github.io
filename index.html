@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon Game</title>
+  <!-- Google Font -->
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: #2f70ff;
+}
+.wrapper {
+  background-color: #ffffff;
+  height: 37.5em;
+  width: 37.5em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 0.5em;
+}
+.simon {
+  height: 31.25em;
+  width: 31.25em;
+  background-color: #101010;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.color-part {
+  height: 13.12em;
+  width: 13.12em;
+  position: absolute;
+}
+
+.color-part:focus{
+  outline: none
+}
+.color1 {
+  background-color: #023020;
+  border-radius: 13em 0 0 0;
+  top: 1.87em;
+  left: 1.87em;
+  outline: none
+}
+.color2 {
+  background-color:#8B0000;
+  border-radius: 0 13em 0 0;
+  top: 1.87em;
+  right: 1.87em;
+}
+.color3 {
+  background-color: darkcyan;
+  bottom: 1.87em;
+  right: 1.87em;
+  border-radius: 0 0 13em 0;
+}
+.color4 {
+  background-color: #8B8000;
+  bottom: 1.87em;
+  left: 1.87em;
+  border-radius: 0 0 0 13em;
+}
+.simon:before {
+  position: absolute;
+  content: "";
+  background-color: #101010;
+  height: 13.75em;
+  width: 13.75em;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+}
+#count {
+  background-color: #ffffff;
+  font-size: 2.5em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  height: 2em;
+  width: 3em;
+  display: grid;
+  place-items: center;
+  border-radius: 0.3em;
+}
+
+.container {
+  background-color: #2f70ff;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container button {
+  background-color: #ffffff;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  padding: 1em 2em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+.container p {
+  font-size: 2em;
+  color: #ffffff;
+  margin-bottom: 1em;
+}
+.container span {
+  font-weight: 600;
+}
+
+.lime{
+  background: lime;
+}
+
+.red {
+  background: red;
+}
+
+.cyan {
+  background: cyan;
+}
+
+.yellow {
+  background: yellow;
+}
+
+#result{
+  text-align: center;
+  position: relative;
+  bottom: 170px;
+  font-size: 30px
+}
+
+.para{
+  text-align: center;
+  position: relative;
+  bottom: 150px;
+  
+}
+
+.hi{
+  font-size: 500px
+}
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 10px;
+  }
+  .wrapper {
+    height: 35em;
+    width: 35em;
+  }
+}
+</style>
+  <div id="cont" class="container">
+      <h2 id="lastt"></h2>
+    <h1 id="result">Demo Message </h1>
+    <p id="pa" class="para">Colors should be repeated in the same way as the colors will be shown first.The number shown in the middle will determine the level and the number of colors displayed will increase as well</p>
+    <button id="start">Start Game</button>
+  </div>
+  <div hidden id="wra" class="wrapper">
+    <div class="simon">
+      <div class="color1 color-part"></div>
+      <div class="color2 color-part"></div>
+      <div class="color3 color-part"></div>
+      <div class="color4 color-part"></div>
+      <div id="count">0</div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!-- Script -->
+  <script>
+    
+let a = 0
+let b = 0
+let c = 0
+let d = 0
+let e = 0
+let f = 0
+let z=0
+let w = 700
+let i 
+
+let but = document.querySelectorAll(".color-part")
+let man = Array.from(but)
+let color = ["lime","red","cyan","yellow"]
+let comp = []
+let usr = []
+
+class simon{
+  level(){
+    a++
+    count.textContent = a
+    bro.compchoose()
+  }
+  
+  compchoose(){
+    for(i = 0;i<a;i++){
+   
+      let hi = Math.floor(Math.random() * 4);
+      setTimeout(()=>{
+        but[hi].classList.add(color[hi])
+        comp.push(color[hi])
+        console.log(comp,"comp");
+        
+      },w*(i+1))
+      
+      setTimeout(() => {
+        but[hi].classList.remove(color[hi])
+        b++
+        
+      },(w*(i+1)-(-500)))
+      if(i == a-1){
+        bro.user()
+      }
+   
+    }
+    
+  }
+  
+  user(){
+    
+    setTimeout(()=>{
+      let x = (e) => {
+      
+        z++
+      
+        let h = e.target.className[5] - 1
+        e.target.classList.add(color[h])
+        let usrc = e.target.className.slice(18)
+        usr.push(usrc)
+      
+        console.log(usr, "usr");
+        if (usr[z - 1] == comp[z - 1]) {
+          console.log("winnn");
+          if (comp.length == z) {
+            but[0].removeEventListener("click", x)
+            but[1].removeEventListener("click", x)
+            but[2].removeEventListener("click", x)
+            but[3].removeEventListener("click", x)
+      
+            comp.splice(0, 100)
+            usr.splice(0, 100)
+            z = 0
+            bro.level()
+      
+          }
+        }else{
+          wra.hidden = true;
+          lastt.textContent = `Your score is ${a-1}`
+          lastt.style.fontSize = "20px"
+        }
+        setTimeout(() => {
+          e.target.classList.remove(color[h])
+      
+        },100)
+      }
+      but.forEach((j)=>{
+        j.addEventListener("click",x)
+        
+      })
+    },(w*(i+1)-(-500)))
+  }
+  
+  
+}
+let bro = new simon()
+start.addEventListener("click",(e)=>{
+  result.hidden = true 
+  pa.hidden = true 
+  start.hidden = true
+  wra.hidden = false
+  bro.level()
+})
+
+
+  </script>
+</body>
+
+</html>
